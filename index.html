@@ -76,6 +76,74 @@
     </div>
 
     <footer>Philip Edekobi &copy;2021</footer>
+        
+    <style>
+        body{
+    font-size: 1.5em;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 0px;
+}
+
+#top{
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 1.2em;
+    background-color: blue;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+}
+#rest{
+    box-sizing: border-box;
+    font-size: 0.7em;
+    text-align: center;
+    padding: 40px 25px 40px 25px;
+    display: inline-block;
+    align-self: center;
+}
+
+main{
+    box-sizing: border-box;
+    width: 50%;
+    min-height: 450px;
+    padding: 25px;
+    box-shadow: 5px 10px 93px -15px rgb(90, 90, 00);
+    text-align: center;
+    float: left;
+}
+
+#content{
+    text-align: center;
+    box-sizing: border-box;
+    padding: 45px;
+    margin: 35px;
+    margin-bottom: 5px;
+    border: 3px blue dotted;
+}
+
+img{
+    width: 40%;
+    height: 40%;
+    float: left;
+    margin: 20px;
+}
+
+.submit{
+    background-color: #00f;
+    color: #fff;
+    border-radius: 9px;
+    font-size: 0.5em;
+}
+
+.submit:hover{
+    cursor: pointer;
+}
+
+footer{
+    font-size: 0.5em;
+}
+    </style>
 
     <script defer>
         const convForm = document.querySelector("form");
@@ -94,7 +162,7 @@
             from = fromSelect.options[fromSelect.selectedIndex].value;
             to = toSelect.options[toSelect.selectedIndex].value;
 
-            let url = `http://api.exchangeratesapi.io/latest?symbols=${from},${to}&access_key=${key}`;
+            let url = `https://api.exchangeratesapi.io/latest?symbols=${from},${to}&access_key=${key}`;
             fetch(url).then(response => response.json()).then(
                 response => {
                     let para = document.createElement("p");
