@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home: Phil's Convertt</title>
+    <link rel="stylesheet" href="styles/mainstyle.css">
+</head>
+
+<body id="body">
+    <div id="top">
+        Currency Converter
+    </div>
+
+    <div id="rest">
+        <main>
+            <form>
+                <legend style="font-size: 1.4em;">Convert</legend>
+
+                <div id="content">
+                    <p><label for="amount">Amount: <label>
+                    <input type="text" id="amount" placeholder="Amount">
+                </p>
+
+                <p>
+                    <label for="from">From: </label>
+                    <select name="from" id="from">
+                        <option value="NGN">NGN</option>
+                        <option value="USD">USD</option>
+                        <option value="NOK">NOK</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="GBP">GBP</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="PHP">PHP</option>
+                        <option value="PKR">PKR</option>
+                        <option value="HNL">HNL</option>
+                        <option value="EGP">EGP</option>
+                        <option value="CHF">CHF</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="to">To: </label>
+                    <select name="to" id="to">
+                        <option value="USD">USD</option>
+                        <option value="NGN">NGN</option>
+                        <option value="NOK">NOK</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="GBP">GBP</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="PHP">PHP</option>
+                        <option value="PKR">PKR</option>
+                        <option value="HNL">HNL</option>
+                        <option value="EGP">EGP</option>
+                        <option value="CHF">CHF</option>
+                    </select>
+                </p>
+                </div>
+                <p>
+                    <button class="submit" style="font-size: 1em;">Convert</button>
+                </p>
+            </form>
+            <p id="res"></p>
+        </main>
+        <img alt="Cute picture of money" src="images/—Pngtree—beautiful cartoon cute flat money_3595285.png">
+    </div>
+
+    <footer>Philip Edekobi &copy;2021</footer>
+
+    <script defer>
+        const convForm = document.querySelector("form");
+        const key = "126dcc4587c4fec93eb9abdc096527f1";
+
+        var from, to, amount;
+
+        convForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            amount = document.getElementById("amount").value;
+
+            let fromSelect = document.getElementById("from");
+            let toSelect =  document.getElementById("to");
+
+            from = fromSelect.options[fromSelect.selectedIndex].value;
+            to = toSelect.options[toSelect.selectedIndex].value;
+
+            let url = `http://api.exchangeratesapi.io/latest?symbols=${from},${to}&access_key=${key}`;
+            fetch(url).then(response => response.json()).then(
+                response => {
+                    let para = document.createElement("p");
+                    let rate = response.rates[`${to}`] / response.rates[`${from}`];
+                    let result = (parseFloat(rate) * parseFloat(amount)).toFixed(2);
+                    para.innerHTML = `${amount}${from} is equal to ${result}${to}`       
+                    document.getElementById("res").appendChild(para);   
+                    ;
+                    document.getElementById("res").style.border = "1px blue ridge";      
+                }
+            );
+        });
+
+    </script>
+</body>
+
+</html>
